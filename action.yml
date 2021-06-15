@@ -5,6 +5,18 @@ inputs:
     description: 'Who to greet'
     required: true
     default: 'World'
+  secret-one:
+    description: 'SECRET_ONE from github secrets'
+    required: true
+    defaults: "1. not set"
+  secret-two:
+    description: 'SECRET_TWO from github secrets'
+    required: true
+    defaults: "2. not set"
+  secret-three:
+    description: 'SECRET_THREE from github secrets'
+    required: true
+    defaults: "3. not set"
 outputs:
   random-number:
     description: "Random number"
@@ -17,5 +29,5 @@ runs:
     - id: random-number-generator
       run: echo "::set-output name=random-id::$(echo $RANDOM)"
       shell: bash
-    - run: ${{ github.action_path }}/hello.sh
+    - run: ${{ github.action_path }}/hello.sh "${{ inputs.secret-one }}" "${{ inputs.secret-two }}" "${{ inputs.secret-three }}"
       shell: bash
