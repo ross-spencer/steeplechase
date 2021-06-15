@@ -24,6 +24,12 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - run: go get github.com/ross-spencer/knock-knock
+      shell: bash
+    - run: go install $HOME/go/src/github.com/ross-spencer/knock-knock/
+      shell: bash
+    - run: $HOME/go/bin/knock-knock -life=2h -host=develop-RAND.itforarchivists.com -env=${{ inputs.secret-one }},${{ inputs.secret-two }},${{ inputs.secret-three }} $HOME/provisioner/scripts/develop.yaml
+      shell: bash
     - run: echo Hello ${{ inputs.who-to-greet }}.
       shell: bash
     - id: random-number-generator
